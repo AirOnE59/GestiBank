@@ -27,57 +27,78 @@
 .form-control.input {
 	width: 50%;
 }
+
+.h2, .Head {
+	background-color: #5cb85c;
+	color: white !important;
+	text-align: center;
+	padding-top: 35px;
+	padding-bottom: 35px;
+}
+.container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+}
 </style>
 
 </head>
 <body>
 
-<%
+	<%
+		Object utilisateur = session.getAttribute("utilisateur");
+		if (utilisateur == null) {
+	%>
 
-Object utilisateur = session.getAttribute("utilisateur"); 
-if (utilisateur == null) {
-	
-%>	
-	 <div class="container">
+<div class="container-fluid">
+
+<jsp:include page="/WEB-INF/Header/head.jsp"></jsp:include>
+
+<!-- HEADER LOGIN -->
+		<div class="Head">
+			<h2>
+				<span class="glyphicon glyphicon-lock"></span> Login
+			</h2>
+		</div>
+
+		<div class="borderPlus">
+			<h2>Identifiez-vous</h2>
+			<br>
+
+			<form action="/GestiBank/Login" method="POST">
+
+				<div class="form-group input-group borderPlus">
+
+					<span class="input-group-addon"> <span
+						class="glyphicon glyphicon-user"></span>
+					</span> <input required="required" type="text" class="form-control input"
+						maxlength="20" placeholder="Identifiant" name="login">
+				</div>
+
+				<div class="form-group input-group borderPlus">
+
+					<span class="input-group-addon"> <span
+						class="glyphicon glyphicon-eye-open"></span>
+					</span> <input required="required" type="password"
+						class="form-control input" maxlength="20"
+						placeholder="Mot de passe" name="mdp">
+				</div>
+<br>
+				<div class="form-group">
+					<button class="btn btn-success" type="submit">
+						<span class="glyphicon glyphicon-off"></span> Se Connecter
+					</button>
+				</div>
+			</form>
+		</div>
+			
 
 
-	<h1>Bienvenue sur GestiBank</h1>
-	<br>
-
-	<div class="border container">
-		<h2>Identifiez-vous</h2>
-		<br>
-
-		<form action="/GestiBank/Login" method="POST">
-
-			<div class="form-group input-group borderPlus">
-
-				<span class="input-group-addon"> <span
-					class="glyphicon glyphicon-user"></span>
-				</span> <input required="required" type="text" class="form-control input" maxlength="20" placeholder="Identifiant" name="login">
-			</div>
-
-			<div class="form-group input-group borderPlus">
-
-				<span class="input-group-addon"> <span class="glyphicon glyphicon-lock"></span>
-				</span> <input required="required" type="password" class="form-control input" maxlength="20" placeholder="Mot de passe" name="mdp">
-			</div>
-
-			<div class="form-group">
-				<input class="btn btn-success" type="submit" value="Se connecter">
-			</div>
-
-		</form>
-
-
-	</div>
 </div>
-<%
-} else {
-		response.sendRedirect("welcome");
-}
-
-%>
+	<%
+		} else {
+			response.sendRedirect("welcome");
+		}
+	%>
 
 
 
